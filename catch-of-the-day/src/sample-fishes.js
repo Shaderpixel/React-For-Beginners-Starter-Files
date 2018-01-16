@@ -2,7 +2,7 @@
 const fishes = {
   fish1: {
     name: 'Pacific Halibut',
-    image: 'https://i.istockimg.com/file_thumbview_approve/36248396/5/stock-photo-36248396-blackened-cajun-sea-bass.jpg',
+    image: 'http://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18190821/fc85qd002-03-main.jpg',
     desc: 'Everyones favorite white fish. We will cut it to the size you need and ship it.',
     price: 1724,
     status: 'available'

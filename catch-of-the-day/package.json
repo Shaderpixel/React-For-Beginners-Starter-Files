@@ -2,6 +2,7 @@
   "name": "cotd",
   "version": "0.0.1",
   "private": true,
+  "homepage": "https://shaderpixel.github.io/fishy-app",
   "devDependencies": {
     "autoprefixer-stylus": "0.10.0",
     "babel-eslint": "^7.1.1",
@@ -9,7 +10,7 @@
     "eslint": "^3.12.2",
     "eslint-plugin-flowtype": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-react": "^7.5.1",
     "react-scripts": "0.6.1",
     "stylus": "0.54.5"
   },
@@ -19,7 +20,8 @@
     "react": "15.3.2",
     "react-addons-css-transition-group": "15.3.2",
     "react-dom": "15.3.2",
-    "react-router": "4.0.0-alpha.4"
+    "react-router": "4.0.0-alpha.4",
+    "serve": "^6.4.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,7 +29,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "styles": "stylus -u autoprefixer-stylus ./src/css/style.styl -o ./src/css/style.css",
-    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/css/style.styl -o ./src/css/style.css"
+    "styles:watch": "stylus -u autoprefixer-stylus -w ./src/css/style.styl -o ./src/css/style.css",
+    "now-start": "serve --single ./build"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/.eslintrc"

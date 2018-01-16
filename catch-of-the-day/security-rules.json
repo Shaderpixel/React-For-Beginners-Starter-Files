@@ -1,7 +1,9 @@
 // These are your firebase security rules - put them in the "Security & Rules" tab of your database
 {
     "rules": {
+        // room synonymous with storeID
         // won't let people delete an existing room
+        // allow write only when a store doesn't exist
         ".write": "!data.exists()",
         ".read": true,
         "$room" : {
