@@ -21,9 +21,13 @@ import NotFound from './components/NotFound';
 //* ~**************** //
 //* Routing
 //* ~**************** //
+// grab repo name from github.io url
+const repo = `${window.location.pathname.split('/')[1]}`;
+
+
 const Root = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename= {repo}>
       <div>
         {/* Show storepicker component only on homepage*/}
         <Match exactly pattern="/" component={StorePicker} />
