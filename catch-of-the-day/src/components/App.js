@@ -7,22 +7,16 @@ import sampleFishes from '../sample-fishes';
 import base from '../base';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
+  //   // bind() has been replaced with property initializers
+  // }
 
-    this.addFish = this.addFish.bind(this); // bind it to the component itself so that it can be referred to with this keyword
-    this.updateFish = this.updateFish.bind(this);
-    this.removeFish = this.removeFish.bind(this);
-    this.loadSamples = this.loadSamples.bind(this);
-    this.addToOrder = this.addToOrder.bind(this);
-    this.removeFromOrder = this.removeFromOrder.bind(this);
-
-    // initial state
-    this.state = {
-      fishes: {},
-      order: {}
-    };
-  }
+  // initial state
+  state = {
+    fishes: {},
+    order: {}
+  };
 
   // runs before the app component is rendered
   componentWillMount() {
@@ -54,7 +48,7 @@ class App extends React.Component {
   }
 
   // to be used in AddFishForm.js
-  addFish(fish) {
+  addFish = (fish) => {
     // update our state by first takeing a copy of the state
     const fishes = {...this.state.fishes};
 
@@ -65,28 +59,28 @@ class App extends React.Component {
     // set state
     // this.setState({ fishes: fishes });
     this.setState({ fishes });
-  }
+  };
 
   // update fish when existing fish is edited through inventory component
-  updateFish(key, updatedFish) {
+  updateFish = (key, updatedFish) => {
     const fishes = {...this.state.fishes};
     fishes[key] = updatedFish;
     this.setState({ fishes });
-  }
+  };
 
-  removeFish(key) {
+  removeFish = (key) => {
     const fishes = {...this.state.fishes};
     fishes[key] = null;
     this.setState({ fishes });
-  }
+  };
 
-  loadSamples() {
+  loadSamples = () => {
     this.setState({
       fishes: sampleFishes
     });
-  }
+  };
 
-  addToOrder(key) {
+  addToOrder = (key) => {
     // take a copy of our state
     const order = {...this.state.order};
 
@@ -95,15 +89,15 @@ class App extends React.Component {
 
     // update our state with the new changes
     this.setState({ order });
-  }
+  };
 
-  removeFromOrder(key) {
+  removeFromOrder = (key) => {
     const order = {...this.state.order};
 
     delete order[key];
 
     this.setState({order});
-  }
+  };
 
   render() {
     return (

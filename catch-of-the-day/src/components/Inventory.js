@@ -3,21 +3,17 @@ import AddFishForm from './AddFishForm';
 import base from '../base';
 
 class Inventory extends React.Component {
-  constructor() {
-    super();
-    this.renderInventory = this.renderInventory.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.renderLogin = this.renderLogin.bind(this);
-    this.authenticate = this.authenticate.bind(this);
-    this.authHandler = this.authHandler.bind(this);
-    this.logout = this.logout.bind(this);
+  // constructor() {
+  //   super();
+  //   // removed bind() and using property intializers instead
+  // }
 
-    this.state = {
-      uid: null,
-      owner: null
-    };
-  }
+  state = {
+    uid: null,
+    owner: null
+  };
 
+  //if user exists previously, log them right back in
   componentDidMount() {
     base.onAuth((user) => {
       if (user) {
@@ -26,7 +22,7 @@ class Inventory extends React.Component {
     });
   }
 
-  handleChange(e,key) {
+  handleChange = (e,key) => {
     // take a copy of just that one fish and update it with the new data
     const fish = this.props.fishes[key];
 
@@ -35,21 +31,14 @@ class Inventory extends React.Component {
       [e.target.name]: e.target.value
     };
     this.props.updateFish(key, updatedFish);
-  }
+  };
 
-  authenticate(provider) {
+  authenticate = (provider) => {
     console.log(`Trying to log in with ${provider}`);
     base.authWithOAuthPopup(provider, this.authHandler);
-  }
+  };
 
-  logout() {
-    base.unauth(); // log out of providers
-    this.setState({
-      uid: null // delete the uid of logged in person in state
-    });
-  }
-
-  authHandler(err, authData) {
+  authHandler = (err, authData) => {
     console.log(authData);
 
     if (err) {
@@ -78,9 +67,16 @@ class Inventory extends React.Component {
         owner: data.owner || authData.user.uid
       });
     });
-  }
+  };
 
-  renderLogin() {
+  logout = () => {
+    base.unauth(); // log out of providers
+    this.setState({
+      uid: null // delete the uid of logged in person in state
+    });
+  };
+
+  renderLogin = () => {
     return(
      <nav className="login">
        <h2>Inventory</h2>
@@ -90,10 +86,11 @@ class Inventory extends React.Component {
        <button className="twitter" onClick={() => this.authenticate('twitter')}>Log In with Twitter</button>
      </nav>
     );
-  }
+  };
 
-  renderInventory(key) {
+  renderInventory = (key) => {
     const fish = this.props.fishes[key];
+
     return (
       <div className="fish-edit" key={key}>
         <input type="text" name="name" placeholder="Fish Name" defaultValue={fish.name} onChange={(e) => this.handleChange(e, key)}/>
@@ -110,12 +107,12 @@ class Inventory extends React.Component {
         <button onClick={() => this.props.removeFish(key)}>Remove Fish</button>
       </div>
     );
-  }
+  };
 
   render() {
     const logout = <button onClick={this.logout}>Log Out!</button>;
 
-    // check if they are  notlogged in at all
+    // check if they are not logged in, show login page
     if (!this.state.uid) {
       return <div>{this.renderLogin()}</div>;
     }

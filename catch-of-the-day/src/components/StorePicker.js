@@ -19,6 +19,7 @@ class StorePicker extends React.Component {
   render() {
     return ( // return multiple lines of html
       <form className="store-selector" onSubmit={(event) => this.goToStore(event)}>
+        {/* JSX comment syntax */}
         <h2>Please Enter A Store</h2>
         <input type="text" required placeholder="Store Name" defaultValue={getFunName()} ref={(input) => {this.storeInput = input;}}
           />
