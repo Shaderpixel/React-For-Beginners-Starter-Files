@@ -1,5 +1,5 @@
 import React from 'react';
-import {formatPrice} from '../helpers.js';
+import { formatPrice } from '../helpers.js';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Order extends React.Component {
