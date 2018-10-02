@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getFunName } from '../helpers';
 
 class StorePicker extends React.Component {
-  propTypes = {
+  static propTypes = {
     history: PropTypes.object,
   };
 
