@@ -16,7 +16,7 @@ const Root = () => {
         <Miss component={NotFound} />
       </div>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-render(<Root/>, document.querySelector('#main'));
+render(<Root />, document.querySelector('#main'));

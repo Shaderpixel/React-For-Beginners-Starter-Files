@@ -5,4 +5,4 @@ import App from './components/App';
 
 import StorePicker from './components/StorePicker';
 
-render(<App/>, document.querySelector('#main'));
+render(<App />, document.querySelector('#main'));

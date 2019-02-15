@@ -4,4 +4,4 @@ import './css/style.css';
 
 import StorePicker from './components/StorePicker';
 
-render(<StorePicker/>, document.querySelector('#main'));
+render(<StorePicker />, document.querySelector('#main'));

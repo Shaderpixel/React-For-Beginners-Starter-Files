@@ -14,25 +14,25 @@ class Inventory extends React.Component {
 
     this.state = {
       uid: null,
-      owner: null
+      owner: null,
     };
   }
 
   componentDidMount() {
-    base.onAuth((user) => {
+    base.onAuth(user => {
       if (user) {
         this.authHandler(null, { user });
       }
     });
   }
 
-  handleChange(e,key) {
+  handleChange(e, key) {
     // take a copy of just that one fish and update it with the new data
     const fish = this.props.fishes[key];
 
     const updatedFish = {
       ...fish,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     };
     this.props.updateFish(key, updatedFish);
   }
@@ -45,7 +45,7 @@ class Inventory extends React.Component {
   logout() {
     base.unauth(); // log out of providers
     this.setState({
-      uid: null // delete the uid of logged in person in state
+      uid: null, // delete the uid of logged in person in state
     });
   }
 
@@ -61,34 +61,46 @@ class Inventory extends React.Component {
     const storeRef = base.database().ref(this.props.storeId);
 
     // query the firebase once for the store data
-    storeRef.once('value', (snapshot) => {
+    storeRef.once('value', snapshot => {
       // to get the data out of snapshot we use val() method
       const data = snapshot.val() || {};
 
       // claim it as our own if there is no owner already
       if (!data.owner) {
         storeRef.set({
-          owner: authData.user.uid
+          owner: authData.user.uid,
         });
       }
 
       // set the state locally in React
       this.setState({
         uid: authData.user.uid,
-        owner: data.owner || authData.user.uid
+        owner: data.owner || authData.user.uid,
       });
     });
   }
 
   renderLogin() {
-    return(
-     <nav className="login">
-       <h2>Inventory</h2>
-       <p>Sign in to manage your store's inventory</p>
-       <button className="github" onClick={() => this.authenticate('github')}>Log In with Github</button>
-       <button className="facebook" onClick={() => this.authenticate('facebook')}>Log In with Facebook</button>
-       <button className="twitter" onClick={() => this.authenticate('twitter')}>Log In with Twitter</button>
-     </nav>
+    return (
+      <nav className="login">
+        <h2>Inventory</h2>
+        <p>Sign in to manage your store's inventory</p>
+        <button className="github" onClick={() => this.authenticate('github')}>
+          Log In with Github
+        </button>
+        <button
+          className="facebook"
+          onClick={() => this.authenticate('facebook')}
+        >
+          Log In with Facebook
+        </button>
+        <button
+          className="twitter"
+          onClick={() => this.authenticate('twitter')}
+        >
+          Log In with Twitter
+        </button>
+      </nav>
     );
   }
 
@@ -96,17 +108,47 @@ class Inventory extends React.Component {
     const fish = this.props.fishes[key];
     return (
       <div className="fish-edit" key={key}>
-        <input type="text" name="name" placeholder="Fish Name" defaultValue={fish.name} onChange={(e) => this.handleChange(e, key)}/>
-        <input type="text" name="price" placeholder="Fish Price" value={fish.price} onChange={(e) => this.handleChange(e, key)}/>
+        <input
+          type="text"
+          name="name"
+          placeholder="Fish Name"
+          defaultValue={fish.name}
+          onChange={e => this.handleChange(e, key)}
+        />
+        <input
+          type="text"
+          name="price"
+          placeholder="Fish Price"
+          value={fish.price}
+          onChange={e => this.handleChange(e, key)}
+        />
 
-        <select type="text" name="status" placeholder="Fish Status" value={fish.status} onChange={(e) => this.handleChange(e, key)}>
+        <select
+          type="text"
+          name="status"
+          placeholder="Fish Status"
+          value={fish.status}
+          onChange={e => this.handleChange(e, key)}
+        >
           <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
 
-        <textarea type="text" name="desc" placeholder="Fish Desc" value={fish.desc} onChange={(e) => this.handleChange(e, key)}></textarea>
-        <input type="text" name="image" placeholder="Fish Image" value={fish.image} onChange={(e) => this.handleChange(e, key)}/>
-        {/* <button onClick={this.props.removeFish.bind(null, key)}>Remove Fish</button> or */ }
+        <textarea
+          type="text"
+          name="desc"
+          placeholder="Fish Desc"
+          value={fish.desc}
+          onChange={e => this.handleChange(e, key)}
+        />
+        <input
+          type="text"
+          name="image"
+          placeholder="Fish Image"
+          value={fish.image}
+          onChange={e => this.handleChange(e, key)}
+        />
+        {/* <button onClick={this.props.removeFish.bind(null, key)}>Remove Fish</button> or */}
         <button onClick={() => this.props.removeFish(key)}>Remove Fish</button>
       </div>
     );
@@ -134,12 +176,8 @@ class Inventory extends React.Component {
       <div>
         <h2>Inventory</h2>
         {logout}
-        {
-          Object
-            .keys(this.props.fishes)
-            .map(this.renderInventory)
-        }
-        <AddFishForm addFish={this.props.addFish}/>
+        {Object.keys(this.props.fishes).map(this.renderInventory)}
+        <AddFishForm addFish={this.props.addFish} />
         <button onClick={this.props.loadSamples}>Load Sample Fishes</button>
       </div>
     );
@@ -152,7 +190,7 @@ Inventory.propTypes = {
   updateFish: React.PropTypes.func.isRequired,
   removeFish: React.PropTypes.func.isRequired,
   loadSamples: React.PropTypes.func.isRequired,
-  storeId: React.PropTypes.string.isRequired
+  storeId: React.PropTypes.string.isRequired,
 };
 
 export default Inventory;

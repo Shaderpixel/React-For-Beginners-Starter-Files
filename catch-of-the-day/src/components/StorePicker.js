@@ -17,11 +17,22 @@ class StorePicker extends React.Component {
   }
 
   render() {
-    return ( // return multiple lines of html
-      <form className="store-selector" onSubmit={(event) => this.goToStore(event)}>
+    return (
+      // return multiple lines of html
+      <form
+        className="store-selector"
+        onSubmit={event => this.goToStore(event)}
+      >
         <h2>Please Enter A Store</h2>
-        <input type="text" required placeholder="Store Name" defaultValue={getFunName()} ref={(input) => {this.storeInput = input;}}
-          />
+        <input
+          type="text"
+          required
+          placeholder="Store Name"
+          defaultValue={getFunName()}
+          ref={input => {
+            this.storeInput = input;
+          }}
+        />
         <button type="submit">Visit Store →</button>
       </form>
     );
@@ -30,7 +41,7 @@ class StorePicker extends React.Component {
 
 // make router available to component through context
 StorePicker.contextTypes = {
-  router: React.PropTypes.object
+  router: React.PropTypes.object,
 };
 
 export default StorePicker;

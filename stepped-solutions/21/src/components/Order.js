@@ -10,16 +10,22 @@ class Order extends React.Component {
     const fish = this.props.fishes[key];
     const count = this.props.order[key];
 
-    if(!fish || fish.status === 'unavailable') {
-      return <li key={key}>Sorry, {fish ? fish.name : 'fish'} is no longer available!</li>
+    if (!fish || fish.status === 'unavailable') {
+      return (
+        <li key={key}>
+          Sorry, {fish ? fish.name : 'fish'} is no longer available!
+        </li>
+      );
     }
 
     return (
       <li key={key}>
-        <span>{count}lbs {fish.name}</span>
+        <span>
+          {count}lbs {fish.name}
+        </span>
         <span className="price">{formatPrice(count * fish.price)}</span>
       </li>
-    )
+    );
   }
 
   render() {
@@ -28,8 +34,8 @@ class Order extends React.Component {
       const fish = this.props.fishes[key];
       const count = this.props.order[key];
       const isAvailable = fish && fish.status === 'available';
-      if(isAvailable) {
-        return prevTotal + (count * fish.price || 0)
+      if (isAvailable) {
+        return prevTotal + (count * fish.price || 0);
       }
       return prevTotal;
     }, 0);
@@ -43,9 +49,8 @@ class Order extends React.Component {
             {formatPrice(total)}
           </li>
         </ul>
-
       </div>
-    )
+    );
   }
 }
 

@@ -18,7 +18,7 @@ class App extends React.Component {
     // getinitialState
     this.state = {
       fishes: {},
-      order: {}
+      order: {},
     };
   }
 
@@ -26,19 +26,20 @@ class App extends React.Component {
     // this runs right before the <App> is rendered
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
       context: this,
-      state: 'fishes'
+      state: 'fishes',
     });
 
     // check if there is any order in localStorage
-    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+    const localStorageRef = localStorage.getItem(
+      `order-${this.props.params.storeId}`,
+    );
 
-    if(localStorageRef) {
+    if (localStorageRef) {
       // update our App component's order state
       this.setState({
-        order: JSON.parse(localStorageRef)
+        order: JSON.parse(localStorageRef),
       });
     }
-
   }
 
   componentWillUnmount() {
@@ -46,12 +47,15 @@ class App extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order));
+    localStorage.setItem(
+      `order-${this.props.params.storeId}`,
+      JSON.stringify(nextState.order),
+    );
   }
 
   addFish(fish) {
     // update our state
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
     // add in our new fish
     const timestamp = Date.now();
     fishes[`fish-${timestamp}`] = fish;
@@ -60,20 +64,20 @@ class App extends React.Component {
   }
 
   updateFish(key, updatedFish) {
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
     fishes[key] = updatedFish;
     this.setState({ fishes });
   }
 
   loadSamples() {
     this.setState({
-      fishes: sampleFishes
+      fishes: sampleFishes,
     });
   }
 
   addToOrder(key) {
     // take a copy of our state
-    const order = {...this.state.order};
+    const order = { ...this.state.order };
     // update or add the new number of fish ordered
     order[key] = order[key] + 1 || 1;
     // update our state
@@ -86,11 +90,14 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
           <ul className="list-of-fishes">
-            {
-              Object
-                .keys(this.state.fishes)
-                .map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)
-            }
+            {Object.keys(this.state.fishes).map(key => (
+              <Fish
+                key={key}
+                index={key}
+                details={this.state.fishes[key]}
+                addToOrder={this.addToOrder}
+              />
+            ))}
           </ul>
         </div>
         <Order
@@ -105,7 +112,7 @@ class App extends React.Component {
           updateFish={this.updateFish}
         />
       </div>
-    )
+    );
   }
 }
 

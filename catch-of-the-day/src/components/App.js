@@ -20,7 +20,7 @@ class App extends React.Component {
     // initial state
     this.state = {
       fishes: {},
-      order: {}
+      order: {},
     };
   }
 
@@ -29,17 +29,19 @@ class App extends React.Component {
     // load fish state from firebase
     this.ref = base.syncState(`${this.props.params.storeID}/fishes`, {
       context: this,
-      state: 'fishes'
+      state: 'fishes',
     });
 
     // check if there is any order in localstorage
-    const localStorageRef = localStorage.getItem(`order-${this.props.params.storeID}`);
+    const localStorageRef = localStorage.getItem(
+      `order-${this.props.params.storeID}`,
+    );
 
     // if there is a order localstorage
     if (localStorageRef) {
       // update our app component's order state
       this.setState({
-        order: JSON.parse(localStorageRef)
+        order: JSON.parse(localStorageRef),
       });
     }
   }
@@ -50,13 +52,16 @@ class App extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(`order-${this.props.params.storeID}`, JSON.stringify(nextState.order));
+    localStorage.setItem(
+      `order-${this.props.params.storeID}`,
+      JSON.stringify(nextState.order),
+    );
   }
 
   // to be used in AddFishForm.js
   addFish(fish) {
     // update our state by first takeing a copy of the state
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
 
     // add in our new fish
     const timestamp = Date.now();
@@ -69,26 +74,26 @@ class App extends React.Component {
 
   // update fish when existing fish is edited through inventory component
   updateFish(key, updatedFish) {
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
     fishes[key] = updatedFish;
     this.setState({ fishes });
   }
 
   removeFish(key) {
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
     fishes[key] = null;
     this.setState({ fishes });
   }
 
   loadSamples() {
     this.setState({
-      fishes: sampleFishes
+      fishes: sampleFishes,
     });
   }
 
   addToOrder(key) {
     // take a copy of our state
-    const order = {...this.state.order};
+    const order = { ...this.state.order };
 
     // update or add the new orders
     order[key] = order[key] + 1 || 1;
@@ -98,47 +103,50 @@ class App extends React.Component {
   }
 
   removeFromOrder(key) {
-    const order = {...this.state.order};
+    const order = { ...this.state.order };
 
     delete order[key];
 
-    this.setState({order});
+    this.setState({ order });
   }
 
   render() {
     return (
-     <div className="catch-of-the-day">
-      <div className="menu">
-        <Header tagline="Fresh Seafood Market"/>
-        <ul className="list-of-fishes">
-          {
-            Object
-              .keys(this.state.fishes)
-              .map((key) => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>)
-          }
-        </ul>
+      <div className="catch-of-the-day">
+        <div className="menu">
+          <Header tagline="Fresh Seafood Market" />
+          <ul className="list-of-fishes">
+            {Object.keys(this.state.fishes).map(key => (
+              <Fish
+                key={key}
+                index={key}
+                details={this.state.fishes[key]}
+                addToOrder={this.addToOrder}
+              />
+            ))}
+          </ul>
+        </div>
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          params={this.props.params}
+          removeFromOrder={this.removeFromOrder}
+        />
+        <Inventory
+          fishes={this.state.fishes}
+          addFish={this.addFish}
+          updateFish={this.updateFish}
+          removeFish={this.removeFish}
+          loadSamples={this.loadSamples}
+          storeId={this.props.params.storeID}
+        />
       </div>
-      <Order
-        fishes={this.state.fishes}
-        order={this.state.order}
-        params={this.props.params}
-        removeFromOrder={this.removeFromOrder}
-      />
-      <Inventory
-        fishes={this.state.fishes}
-        addFish={this.addFish}
-        updateFish={this.updateFish}
-        removeFish={this.removeFish}
-        loadSamples={this.loadSamples}
-        storeId={this.props.params.storeID}
-      />
-     </div>
     );
   }
 }
 
 App.propTypes = {
-  params: React.PropTypes.object.isRequired
+  params: React.PropTypes.object.isRequired,
 };
 
 export default App;

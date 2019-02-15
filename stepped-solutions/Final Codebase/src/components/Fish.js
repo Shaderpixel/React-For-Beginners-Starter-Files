@@ -14,16 +14,21 @@ class Fish extends React.Component {
           <span className="price">{formatPrice(details.price)}</span>
         </h3>
         <p>{details.desc}</p>
-        <button onClick={() => this.props.addToOrder(index)} disabled={!isAvailable}>{buttonText}</button>
+        <button
+          onClick={() => this.props.addToOrder(index)}
+          disabled={!isAvailable}
+        >
+          {buttonText}
+        </button>
       </li>
-    )
+    );
   }
 }
 
 Fish.propTypes = {
   details: React.PropTypes.object.isRequired,
   index: React.PropTypes.string.isRequired,
-  addToOrder: React.PropTypes.func.isRequired
+  addToOrder: React.PropTypes.func.isRequired,
 };
 
 export default Fish;

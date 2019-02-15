@@ -14,7 +14,7 @@ class Fish extends React.Component {
         <p>{details.desc}</p>
         <button>Add To Order</button>
       </li>
-    )
+    );
   }
 }
 

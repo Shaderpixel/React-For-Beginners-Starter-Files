@@ -15,13 +15,13 @@ class App extends React.Component {
     // getinitialState
     this.state = {
       fishes: {},
-      order: {}
+      order: {},
     };
   }
 
   addFish(fish) {
     // update our state
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
     // add in our new fish
     const timestamp = Date.now();
     fishes[`fish-${timestamp}`] = fish;
@@ -31,7 +31,7 @@ class App extends React.Component {
 
   loadSamples() {
     this.setState({
-      fishes: sampleFishes
+      fishes: sampleFishes,
     });
   }
 
@@ -41,17 +41,15 @@ class App extends React.Component {
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
           <ul className="list-of-fishes">
-            {
-              Object
-                .keys(this.state.fishes)
-                .map(key => <Fish key={key} details={this.state.fishes[key]} />)
-            }
+            {Object.keys(this.state.fishes).map(key => (
+              <Fish key={key} details={this.state.fishes[key]} />
+            ))}
           </ul>
         </div>
         <Order />
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples} />
       </div>
-    )
+    );
   }
 }
 
