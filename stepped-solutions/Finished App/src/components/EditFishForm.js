@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class EditFishForm extends React.Component {
   static propTypes = {
@@ -8,10 +8,10 @@ class EditFishForm extends React.Component {
       name: PropTypes.string,
       desc: PropTypes.string,
       status: PropTypes.string,
-      price: PropTypes.number
+      price: PropTypes.number,
     }),
     index: PropTypes.string,
-    updateFish: PropTypes.func
+    updateFish: PropTypes.func,
   };
   handleChange = event => {
     console.log(event.currentTarget.value);
@@ -19,7 +19,7 @@ class EditFishForm extends React.Component {
     // 1. Take a copy of the curernt fish
     const updatedFish = {
       ...this.props.fish,
-      [event.currentTarget.name]: event.currentTarget.value
+      [event.currentTarget.name]: event.currentTarget.value,
     };
     this.props.updateFish(this.props.index, updatedFish);
   };

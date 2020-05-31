@@ -1,15 +1,15 @@
-import React from "react";
-import Header from "./Header";
-import Order from "./Order";
-import Inventory from "./Inventory";
-import sampleFishes from "../sample-fishes";
-import Fish from "./Fish";
-import base from "../base";
+import React from 'react';
+import Header from './Header';
+import Order from './Order';
+import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
+import Fish from './Fish';
+import base from '../base';
 
 class App extends React.Component {
   state = {
     fishes: {},
-    order: {}
+    order: {},
   };
 
   componentDidMount() {
@@ -22,7 +22,7 @@ class App extends React.Component {
 
     this.ref = base.syncState(`${params.storeId}/fishes`, {
       context: this,
-      state: "fishes"
+      state: 'fishes',
     });
   }
 
@@ -30,7 +30,7 @@ class App extends React.Component {
     console.log(this.state.order);
     localStorage.setItem(
       this.props.match.params.storeId,
-      JSON.stringify(this.state.order)
+      JSON.stringify(this.state.order),
     );
   }
 

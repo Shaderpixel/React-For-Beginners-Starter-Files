@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class AddFishForm extends React.Component {
   nameRef = React.createRef();
@@ -15,7 +15,7 @@ class AddFishForm extends React.Component {
       price: parseFloat(this.priceRef.value.value),
       status: this.statusRef.value.value,
       desc: this.descRef.value.value,
-      image: this.imageRef.value.value
+      image: this.imageRef.value.value,
     };
     this.props.addFish(fish);
     // refresh the form

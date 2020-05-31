@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { formatPrice } from "../helpers";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { formatPrice } from '../helpers';
 
 class Fish extends React.Component {
   static propTypes = {
@@ -9,13 +9,13 @@ class Fish extends React.Component {
       name: PropTypes.string,
       desc: PropTypes.string,
       status: PropTypes.string,
-      price: PropTypes.number
+      price: PropTypes.number,
     }),
-    addToOrder: PropTypes.func
+    addToOrder: PropTypes.func,
   };
   render() {
     const { image, name, price, desc, status } = this.props.details;
-    const isAvailable = status === "available";
+    const isAvailable = status === 'available';
     return (
       <li className="menu-fish">
         <img src={image} alt={name} />
@@ -28,7 +28,7 @@ class Fish extends React.Component {
           disabled={!isAvailable}
           onClick={() => this.props.addToOrder(this.props.index)}
         >
-          {isAvailable ? "Add To Order" : "Sold Out!"}
+          {isAvailable ? 'Add To Order' : 'Sold Out!'}
         </button>
       </li>
     );

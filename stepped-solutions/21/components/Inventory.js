@@ -1,6 +1,6 @@
-import React from "react";
-import AddFishForm from "./AddFishForm";
-import EditFishForm from "./EditFishForm";
+import React from 'react';
+import AddFishForm from './AddFishForm';
+import EditFishForm from './EditFishForm';
 
 class Inventory extends React.Component {
   render() {
